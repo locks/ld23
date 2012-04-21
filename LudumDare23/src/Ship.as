@@ -11,6 +11,8 @@ package
 		
 		private var _speed:int; 
 		
+		private static var _noAccel:FlxPoint = new FlxPoint(0, 0);
+		
 		public function Ship(X:int, Y:int) 
 		{
 			super(X, Y)
@@ -24,45 +26,50 @@ package
 			addAnimation("standByRight", [20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], 30, true);
 			play("standBy");
 			
-			// mass
+			// inertia variables
 			mass = 0.5;
-			// acceleration
-			acceleration = new FlxPoint(30, 30);
-			// maxSpeed
-			maxVelocity = new FlxPoint(150, 150);
 			
+			acceleration.x = 0;
+			acceleration.y = 0;
 			
+			maxVelocity.x = 100;
+			maxVelocity.y = 100;
 			
-			_speed = 150;
+			drag.x = maxVelocity.x * 2;
+			drag.y = maxVelocity.y * 2;
 		}
 		
 		override public function update():void
 		{
-			//MOVEMENT
-			velocity.x = 0;
-			velocity.y = 0;
+			acceleration.x = 0;
+			acceleration.y = 0;
 			
 			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
 				if (this.x + 10 > 0) {
-					velocity.x = -_speed;
+					acceleration.x = -maxVelocity.x * 4;
 					play("standByLeft");
 				}
 			}
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				if (this.x + this.width - 10 < FlxG.width) {
-					velocity.x = _speed;
+					acceleration.x = maxVelocity.x * 4;
 					play("standByRight");
 				}
 			}
+			
 			if(FlxG.keys.W || FlxG.keys.UP)
 			{
-				if(this.y + 10 > 0) velocity.y = -_speed;
+				if (this.y + 10 > 0) {
+					acceleration.y = -maxVelocity.y * 4;
+				}
 			}
 			else if(FlxG.keys.S || FlxG.keys.DOWN)
 			{
-				if(this.y + this.height - 10 < FlxG.height) velocity.y = _speed;
+				if (this.y + this.height - 10 < FlxG.height) {
+					acceleration.y = maxVelocity.y * 4;
+				}
 			}
 			
 			/*
@@ -73,9 +80,9 @@ package
 			}
 			*/
 			
-			if (velocity.x < 0) play("standByLeft");
+			if (velocity.x  < 0) play("standByLeft");
 			if (velocity.x == 0) play("standBy");
-			if ( velocity.x > 0) play("standByRight");
+			if (velocity.x  > 0) play("standByRight");
 
 			super.update();
 		}

@@ -56,7 +56,6 @@ package
 			FlxG.switchState(new PlayState());
 		}
 		
-		
 	}
 
 }
