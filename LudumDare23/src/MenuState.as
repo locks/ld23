@@ -15,7 +15,7 @@ package
 			FlxG.bgColor = 0xff000000;
 			
 			Title = new FlxText(FlxG.width / 2, FlxG.height / 3, 100, "LudumDare23")
-			Title.alignment("center");
+			Title.alignment = "center";
 			add(Title);
 			
 			devButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 60, "Insert Site", onSite);

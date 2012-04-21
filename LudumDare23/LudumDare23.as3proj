@@ -1,20 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie disabled="False" />
+    <movie outputType="Application" />
     <movie input="" />
     <movie path="bin\LudumDare23.swf" />
     <movie fps="60" />
     <movie width="640" />
     <movie height="480" />
     <movie version="10" />
+    <movie minorVersion="0" />
+    <movie platform="Flash Player" />
     <movie background="#000000" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
-    <class path="..\flixel" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -25,6 +26,7 @@
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
+    <option omitTraces="True" />
     <option showActionScriptWarnings="True" />
     <option showBindingWarnings="True" />
     <option showInvalidCSS="True" />
@@ -40,7 +42,7 @@
     <option staticLinkRSL="True" />
     <option additional="" />
     <option compilerConstants="" />
-    <option customSDK="" />
+    <option minorVersion="" />
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
@@ -83,4 +85,6 @@
     <option showHiddenPaths="False" />
     <option testMovie="Default" />
   </options>
+  <!-- Plugin storage -->
+  <storage />
 </project>
