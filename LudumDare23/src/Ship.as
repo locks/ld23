@@ -48,14 +48,12 @@ package
 			{
 				if (this.x + 10 > 0) {
 					acceleration.x = -maxVelocity.x * 4;
-					play("standByLeft");
 				}
 			}
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
 				if (this.x + this.width - 10 < FlxG.width) {
 					acceleration.x = maxVelocity.x * 4;
-					play("standByRight");
 				}
 			}
 			
@@ -80,9 +78,9 @@ package
 			}
 			*/
 			
-			if (velocity.x  < 0) play("standByLeft");
-			if (velocity.x == 0) play("standBy");
-			if (velocity.x  > 0) play("standByRight");
+			//if (velocity.x  < 0) play("standByLeft");
+			//if (velocity.x == 0) play("standBy");
+			//if (velocity.x  > 0) play("standByRight");
 
 			super.update();
 		}
