@@ -9,8 +9,14 @@ package
 	 */
 	public class GalaxyState extends FlxState 
 	{
-		private var playButton:FlxButton;
+		[Embed(source = 'data///galaxyBackground.png')] private var imgGalaxy:Class;
+
+		private var _bkgA:FlxSprite;
+		private var _bkgB:FlxSprite;
+
+		private var background:FlxGroup;
 		
+		private var playButton:FlxButton;
 		private var Title:FlxText;
 		
 		override public function create():void
@@ -25,6 +31,7 @@ package
 			playButton.label.color = 0xffD8EBA2;
 			add(playButton);
 			
+			SetUpBackground();
 		}
 		
 		override public function update():void
@@ -32,6 +39,16 @@ package
 			if (FlxG.keys.X && FlxG.keys.C) onLevelSelected();
 			
 			super.update();	
+		}
+		
+		private function SetUpBackground():void 
+		{
+			background = new FlxGroup();
+			
+			_bkgA = new FlxSprite(0, 0, imgGalaxy);
+
+			background.add(_bkgA);
+			add(background);
 		}
 		
 		protected function onLevelSelected():void
