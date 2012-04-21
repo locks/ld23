@@ -7,3 +7,9 @@ bin-release/
 .flexProperties
 .settings/
 .project
+
+# I don't think this maters...
+*/obj
+
+# OS X
+.DS_Store
