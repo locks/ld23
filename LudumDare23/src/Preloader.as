@@ -1,15 +1,15 @@
 package
 {
 
-	import org.flixel.system.FlxPreloader;
-
-	public class Preloader extends FlxPreloader
+	public class Preloader extends FlxFactory
 	{
 		
 		public function Preloader()
 		{
 			className = "LudumDare23";
 			super();
+			
+			minDisplayTime = 1;
 		}
 		
 	}
