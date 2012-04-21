@@ -14,14 +14,12 @@ package
 		{
 			FlxG.bgColor = 0xff000000;
 			
-			Title = new FlxText(0, FlxG.camera.height / 3, FlxG.camera.width, "LudumDare23")
-			Title.setFormat(null, 16, 0xFFFFFF, "center");
+			Title = new FlxText(0, FlxG.camera.height / 3, FlxG.camera.width, "Shr1nk")
+			Title.setFormat(null, 16, 0xFFFFFF, "center", 0x333333);
 			add(Title);
 			
 			devButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 60, "Insert Site", onSite);
 			devButton.soundOver = null;  //replace with mouseOver sound
-			devButton.color = 0xffD4D943;
-			devButton.label.color = 0xffD8EBA2;
 			add(devButton);
 			
 			playButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 100, "Click To Play", onPlay);
