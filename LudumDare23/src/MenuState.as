@@ -8,6 +8,8 @@ package
 		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
+		private var creditsButton:FlxButton;
+		
 		private var Title:FlxText;
 		
 		override public function create():void
@@ -28,9 +30,14 @@ package
 			playButton.label.color = devButton.label.color;
 			add(playButton);
 			
+			creditsButton = new FlxButton(FlxG.width/2 - 40,FlxG.height / 3 + 100 + playButton.height * 2, "Credits", onCredits);
+			creditsButton.soundOver = devButton.soundOver;
+			creditsButton.color = devButton.color;
+			creditsButton.label.color = devButton.label.color;
+			add(creditsButton);
+			
 			
 			FlxG.mouse.show();
-			
 		}
 		
 		override public function update():void
@@ -49,7 +56,13 @@ package
 		protected function onPlay():void
 		{
 			playButton.exists = false;
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new GalaxyState());
+		}
+		
+		protected function onCredits():void
+		{
+			creditsButton.exists = false;
+			FlxG.switchState(new CreditsState());
 		}
 		
 		
