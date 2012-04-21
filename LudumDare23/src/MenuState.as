@@ -37,6 +37,8 @@ package
 		
 		override public function update():void
 		{
+			if (FlxG.keys.X && FlxG.keys.C) onPlay();
+			
 			super.update();	
 		}
 		
