@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.*;
 	import Enemies.Enemy;
+	import org.flixel.plugin.photonstorm.FlxWeapon;
 
 	public class PlayState extends FlxState
 	{
@@ -16,13 +17,17 @@ package
 		private var _sf:StarField;
 		private var _hud:HUD;
 		
+		private var _cannon:FlxWeapon;
+		
 		override public function create():void
 		{
 			
 			_sf = new StarField();
 			add(_sf);
 			
-			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
+			_cannon = new FlxWeapon("cannon", _player, "x", "y");
+			
+			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets, _cannon);
 			add(_player);
 			
 			_bullets = new FlxGroup();

@@ -1,6 +1,7 @@
 package  
 {
 	import org.flixel.*;
+	import org.flixel.plugin.photonstorm.*;
 	/**
 	 * ...
 	 * @author Deviantgeek
@@ -11,10 +12,12 @@ package
 		
 		private var _speed:int; 
 		
-		public function Ship(X:int, Y:int, Bullets:FlxGroup) 
+		private var _weapon:FlxWeapon;
+		
+		public function Ship(X:int, Y:int, Bullets:FlxGroup, Weapon:FlxWeapon) 
 		{
-			super(X, Y)
-
+			super(X, Y);
+			
 			//crappy img
 			//makeGraphic(40, 40, 0xffffffff);
 			loadGraphic(motherShip, true, false, 40, 55, true);
@@ -24,6 +27,9 @@ package
 			addAnimation("screw", [45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29], 30, false);
 			addAnimation("charge", [20, 21, 22, 23, 24, 25, 26, 27, 28], 30, false);
 			play("standBy");
+			
+			//_weapon = new FlxWeapon("cannon", this);
+			_weapon = Weapon;
 			
 			// elasticity (makes it so when you hit another ship you bounce away slightly)
 			elasticity = 1.5;
@@ -37,8 +43,6 @@ package
 			
 			drag.x = maxVelocity.x * 2;
 			drag.y = maxVelocity.y * 2;			
-			
-			_speed = 150;
 			
 			//tweaks to the hitbox.
 			height = 41;
@@ -75,6 +79,15 @@ package
 				if (this.y + this.height - 10 < FlxG.height) {
 					acceleration.y = maxVelocity.y * 4;
 				}
+			}
+			
+			if (FlxG.mouse.pressed())
+			{
+				FlxG.log("balls");
+				_weapon.makePixelBullet(20, 4, 4, 0x123534);
+				_weapon.setBulletSpeed(0);
+				_weapon.setFireRate(1000);
+				_weapon.fireAtMouse();
 			}
 
 			super.update();
