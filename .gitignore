@@ -11,6 +11,7 @@ bin-release/
 # I don't think this maters...
 */obj
 */bin
+*.swf
 
 # OS X
 .DS_Store

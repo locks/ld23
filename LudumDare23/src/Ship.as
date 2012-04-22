@@ -11,8 +11,6 @@ package
 		
 		private var _speed:int; 
 		
-		private static var _noAccel:FlxPoint = new FlxPoint(0, 0);
-		
 		public function Ship(X:int, Y:int, Bullets:FlxGroup) 
 		{
 			super(X, Y)
@@ -30,7 +28,7 @@ package
 			// elasticity (makes it so when you hit another ship you bounce away slightly)
 			elasticity = 1.5;
 			
-			// acceleration			
+			// acceleration
 			acceleration.x = 0;
 			acceleration.y = 0;
 			
@@ -38,7 +36,9 @@ package
 			maxVelocity.y = 100;
 			
 			drag.x = maxVelocity.x * 2;
-			drag.y = maxVelocity.y * 2;
+			drag.y = maxVelocity.y * 2;			
+			
+			_speed = 150;
 		}
 		
 		override public function update():void
@@ -76,7 +76,7 @@ package
 			{
 				play("unscrew");
 			}
-			
+
 			super.update();
 		}
 		

@@ -31,12 +31,15 @@ package
 			
 			_hud = new HUD();
 			add(_hud)
+
+			Registry.Fuel = 14;
 		}
 		
 		override public function update():void
 		{
 			
 			super.update();
+			
 		}
 		
 		protected  function newSwarm(x:int, y:int):void
