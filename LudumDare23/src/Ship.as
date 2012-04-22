@@ -29,11 +29,8 @@ package
 			
 			// elasticity (makes it so when you hit another ship you bounce away slightly)
 			elasticity = 1.5;
-			// acceleration
-			acceleration = new FlxPoint(30, 30);
-			// maxSpeed
-			maxVelocity = new FlxPoint(150, 150);
 			
+			// acceleration			
 			acceleration.x = 0;
 			acceleration.y = 0;
 			
