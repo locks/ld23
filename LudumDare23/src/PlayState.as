@@ -2,6 +2,7 @@ package
 {
 	import org.flixel.*;
 	import Enemies.Enemy;
+	import org.flixel.plugin.photonstorm.FlxWeapon;
 
 	public class PlayState extends FlxState
 	{
@@ -17,7 +18,11 @@ package
 		
 		private var _hud:HUD;
 		
+<<<<<<< HEAD
 		private var _curPlanet:Planet;
+=======
+		private var _cannon:FlxWeapon;
+>>>>>>> weapon isnt showing up for some reason
 		
 		override public function create():void
 		
@@ -28,7 +33,9 @@ package
 			
 			//shrinkPlanet();
 			
-			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
+			_cannon = new FlxWeapon("cannon", _player, "x", "y");
+			
+			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets, _cannon);
 			add(_player);
 			
 			_bullets = new FlxGroup();
