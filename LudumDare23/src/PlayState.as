@@ -20,11 +20,13 @@ package
 		private var _curPlanet:Planet;
 		
 		override public function create():void
+		
 		{
 			_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
+			_curPlanet.antialiasing = true;
 			add(_curPlanet);
 			
-			shrinkPlanet();
+			//shrinkPlanet();
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			add(_player);
@@ -51,8 +53,6 @@ package
 		private function shrinkPlanet():void
 		{
 			_curPlanet.scale.x = _curPlanet.scale.y = .5;
-			_curPlanet.x -= 150;
-			_curPlanet.y -= 125;
 		}
 	}
 }
