@@ -24,7 +24,10 @@ package
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			add(_player);
-		
+			
+			_bullets = new FlxGroup();
+			add(_bullets);
+			
 			_follow = new Enemy();
 			_follow.init(20, 20, _bullets, _gibs, _player);
 			add(_follow);
@@ -37,21 +40,9 @@ package
 		
 		override public function update():void
 		{
-			
 			super.update();
-			
 		}
 		
-		protected  function newSwarm(x:int, y:int):void
-		{
-			_swarms.add(new FlxSprite(x, y));
-			
-			for (var i:int = 0; i < 10; i++)
-			{
-				_swarms.add(new FlxSprite(x + FlxG.random() * 50, y + FlxG.random() * 50));
-			}
-
-		}
 	}
 }
 

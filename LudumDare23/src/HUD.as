@@ -18,7 +18,6 @@ package
 			 _frame = new FlxSprite(2, FlxG.height - 18, ImgFrame);
 			add(_frame);
 			
-			
 			var tmp:FlxSprite;
 			for (var i:int = 0; i < 15; i++)
 			{

@@ -2,6 +2,8 @@ package Enemies
 {
 	import flash.geom.Point;
 	
+	import Enemies.EnemyBullet;
+	
 	import org.flixel.*;
 	import org.flixel.FlxPoint;
 	import org.flixel.FlxSave;
@@ -146,9 +148,9 @@ package Enemies
         {
           //First, recycle a bullet from the bullet pile.
           //If there are none, recycle will automatically create one for us.
-          //var b:EnemyBullet = _bullets.recycle(EnemyBullet) as EnemyBullet;
+          var b:EnemyBullet = _bullets.recycle(EnemyBullet) as EnemyBullet;
           //Then, shoot it from our midpoint out along our angle.
-          //b.shoot(getMidpoint(_point),angle);
+          b.shoot(getMidpoint(_point),angle);
         }
       }
 
