@@ -8,14 +8,17 @@ package
 	 */
 	public class Registry 
 	{
-		[Embed(source = "data/planets/planet1.gif")]public static var ImgPlanet1:Class;
+		[Embed(source = "data/planets/planet1.gif")] public static var ImgPlanet1:Class;
+		[Embed(source = "data/planets/planet2.gif")] public static var ImgPlanet2:Class;
 		
-		public static var Fuel:int = 15
-		public static var _planets:Array;
+		public static var Fuel:int = 15;
+		public static var Planets:Array = new Array( new Planet(0, 0, ImgPlanet1), new Planet(0, 0, ImgPlanet2) );
+
+		public static var CurrentPlanet:Planet = new Planet(0, 0, ImgPlanet1);
 		
 		public function Registry() 
 		{
-			_planets = [ImgPlanet1]
+			Planets = [ImgPlanet1];
 		}
 		
 	}

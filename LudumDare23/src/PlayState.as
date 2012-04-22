@@ -22,10 +22,12 @@ package
 		private var _cannon:FlxWeapon;
 		
 		override public function create():void
-		
 		{
-			_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
-			_curPlanet.antialiasing = true;
+			//_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
+			_curPlanet = Registry.CurrentPlanet;
+			_curPlanet.x = FlxG.width - 100;
+			_curPlanet.y = FlxG.height - 100;
+			//_curPlanet.antialiasing = true;
 			add(_curPlanet);
 
 			shrinkPlanet();
@@ -57,7 +59,7 @@ package
 		
 		override public function update():void
 		{
-			if (FlxG.mouse.justPressed()) {
+			if (FlxG.mouse.pressed()) {
 				_cannon.setBulletAcceleration(100, 100, 200, 200);
 				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
 				_cannon.fireAtMouse();
