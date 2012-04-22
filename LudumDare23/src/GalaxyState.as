@@ -19,6 +19,8 @@ package
 		private var playButton:FlxButton;
 		private var Title:FlxText;
 		
+		private var _doubleClick:int = 0;
+		
 		override public function create():void
 		{
 			Title = new FlxText(0, FlxG.camera.height / 3, FlxG.camera.width, "Level Select")
@@ -36,7 +38,15 @@ package
 		
 		override public function update():void
 		{
+			if (_doubleClick == 2)
+				onLevelSelected();
+			
 			if (FlxG.keys.X && FlxG.keys.C) onLevelSelected();
+			if (FlxG.mouse.pressed()) {
+				_doubleClick++;
+			} else {
+				_doubleClick = 0;
+			}
 			
 			super.update();	
 		}

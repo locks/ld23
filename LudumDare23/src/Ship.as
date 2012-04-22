@@ -13,7 +13,7 @@ package
 		
 		private static var _noAccel:FlxPoint = new FlxPoint(0, 0);
 		
-		public function Ship(X:int, Y:int) 
+		public function Ship(X:int, Y:int, Bullets:FlxGroup) 
 		{
 			super(X, Y)
 
