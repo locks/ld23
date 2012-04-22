@@ -14,7 +14,6 @@ package
 		protected var _bullets:FlxGroup;
 		protected var _gibs:FlxEmitter;
 		
-		private var _sf:StarField;
 		private var _hud:HUD;
 		
 		private var _cannon:FlxWeapon;
@@ -22,12 +21,14 @@ package
 		override public function create():void
 		{
 			
-			_sf = new StarField();
-			add(_sf);
+			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			
 			_cannon = new FlxWeapon("cannon", _player, "x", "y");
+			_cannon.makePixelBullet(20, 4, 4, 0x123534);
+			_cannon.setBulletSpeed(1);
+			_cannon.setFireRate(1000);
 			
-			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets, _cannon);
+			add(_cannon.group);
 			add(_player);
 			
 			_bullets = new FlxGroup();
@@ -38,13 +39,18 @@ package
 			add(_follow);
 			
 			_hud = new HUD();
-			add(_hud)
+			add(_hud);
 
 			Registry.Fuel = 14;
 		}
 		
 		override public function update():void
 		{
+			if (FlxG.mouse.pressed()) {
+				FlxG.log("BAH");
+				_cannon.fireAtMouse();
+			}
+			
 			super.update();
 		}
 		
