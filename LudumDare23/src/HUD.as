@@ -34,6 +34,22 @@ package
 			}
 			add(_FuelGroup)
 		}
+		
+		override public function update():void
+		{
+			/*
+			var l:uint = _FuelGroup.length;
+			for(var i:uint = 0; i < l; i++)
+			{
+				if(i-1 < Registry.Fuel)
+					_FuelGroup[i].play("full");
+				else
+					_FuelGroup[i].play("empty");
+			}
+			super.update();
+			*/
+			
+		}
 	}
 
 }
