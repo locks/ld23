@@ -39,6 +39,11 @@ package
 			drag.y = maxVelocity.y * 2;			
 			
 			_speed = 150;
+			
+			//tweaks to the hitbox.
+			height = 41;
+			width = 40;
+			offset.y = 11;
 		}
 		
 		override public function update():void
@@ -70,11 +75,6 @@ package
 				if (this.y + this.height - 10 < FlxG.height) {
 					acceleration.y = maxVelocity.y * 4;
 				}
-			}
-			
-			if (FlxG.keys.SPACE)
-			{
-				play("unscrew");
 			}
 
 			super.update();

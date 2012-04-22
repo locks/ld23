@@ -8,8 +8,6 @@ package
 		{
 			className = "LudumDare23";
 			super();
-			
-			minDisplayTime = 1;
 		}
 		
 	}
