@@ -25,9 +25,6 @@ package
 			addAnimation("charge", [20, 21, 22, 23, 24, 25, 26, 27, 28], 30, false);
 			play("standBy");
 			
-			// elasticity (makes it so when you hit another ship you bounce away slightly)
-			elasticity = 1.5;
-			
 			// acceleration
 			acceleration.x = 0;
 			acceleration.y = 0;
@@ -37,8 +34,6 @@ package
 			
 			drag.x = maxVelocity.x * 2;
 			drag.y = maxVelocity.y * 2;			
-			
-			_speed = 150;
 		}
 		
 		override public function update():void
