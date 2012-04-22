@@ -18,11 +18,8 @@ package
 		
 		private var _hud:HUD;
 		
-<<<<<<< HEAD
 		private var _curPlanet:Planet;
-=======
 		private var _cannon:FlxWeapon;
->>>>>>> weapon isnt showing up for some reason
 		
 		override public function create():void
 		
@@ -30,12 +27,17 @@ package
 			_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
 			add(_curPlanet);
+
+			shrinkPlanet();
 			
-			//shrinkPlanet();
+			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			
 			_cannon = new FlxWeapon("cannon", _player, "x", "y");
+			_cannon.makePixelBullet(20, 4, 4, 0x123534);
+			_cannon.setBulletSpeed(1);
+			_cannon.setFireRate(1000);
 			
-			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets, _cannon);
+			add(_cannon.group);
 			add(_player);
 			
 			_bullets = new FlxGroup();
@@ -50,10 +52,17 @@ package
 			
 			FlxG.mouse.load(ImgCursor, 3);
 			FlxG.mouse.show();
+
+			Registry.Fuel = 14;
 		}
 		
 		override public function update():void
 		{
+			if (FlxG.mouse.pressed()) {
+				FlxG.log("BAH");
+				_cannon.fireAtMouse();
+			}
+			
 			super.update();
 		}
 		

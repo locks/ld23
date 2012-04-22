@@ -14,7 +14,7 @@ package
 		
 		private var _weapon:FlxWeapon;
 		
-		public function Ship(X:int, Y:int, Bullets:FlxGroup, Weapon:FlxWeapon) 
+		public function Ship(X:int, Y:int, Bullets:FlxGroup, Weapon:FlxWeapon = null)
 		{
 			super(X, Y);
 			
@@ -81,18 +81,9 @@ package
 				}
 			}
 			
-			if (FlxG.mouse.pressed())
-			{
-				FlxG.log("balls");
-				_weapon.makePixelBullet(20, 4, 4, 0x123534);
-				_weapon.setBulletSpeed(0);
-				_weapon.setFireRate(1000);
-				_weapon.fireAtMouse();
-			}
-
 			super.update();
 		}
-		
+			
 	}
 
 }
