@@ -5,6 +5,8 @@ package
 
 	public class PlayState extends FlxState
 	{
+		[Embed(source = 'data///crosshair.png')] private var ImgCursor:Class;
+
 		protected var _player:Ship;
 		protected var _swarms:FlxGroup;
 		
@@ -35,9 +37,10 @@ package
 			add(_follow);
 			
 			_hud = new HUD();
-			add(_hud)
+			add(_hud);
 			
-			
+			FlxG.mouse.load(ImgCursor, 3);
+			FlxG.mouse.show();
 		}
 		
 		override public function update():void
