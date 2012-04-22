@@ -13,19 +13,24 @@ package
 		protected var _bullets:FlxGroup;
 		protected var _gibs:FlxEmitter;
 		
+		private var _sf:StarField;
+		private var _hud:HUD;
+		
 		override public function create():void
 		{
-			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 40, _bullets);
 			
+			_sf = new StarField();
+			add(_sf);
+			
+			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			add(_player);
-			//add(_swarms);
-			
+		
 			_follow = new Enemy();
 			_follow.init(20, 20, _bullets, _gibs, _player);
 			add(_follow);
 			
-			
-			//newSwarm(10, 10);
+			_hud = new HUD();
+			add(_hud)
 		}
 		
 		override public function update():void
