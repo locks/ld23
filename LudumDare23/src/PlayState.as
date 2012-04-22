@@ -23,9 +23,8 @@ package
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			
-			_cannon = new FlxWeapon("cannon", _player, "x", "y");
+			_cannon = new FlxWeapon("cannon", _player);
 			_cannon.makePixelBullet(20, 4, 4, 0xFF123456);
-			_cannon.setBulletSpeed(100);
 			_cannon.setFireRate(1000);
 			
 			add(_cannon.group);
@@ -46,8 +45,9 @@ package
 		
 		override public function update():void
 		{
-			if (FlxG.mouse.pressed()) {
-				FlxG.log("BAH");
+			if (FlxG.mouse.justPressed()) {
+				_cannon.setBulletAcceleration(100, 100, 200, 200);
+				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
 				_cannon.fireAtMouse();
 			}
 			
