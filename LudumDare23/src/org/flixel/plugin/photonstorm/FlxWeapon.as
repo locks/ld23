@@ -89,6 +89,7 @@ package org.flixel.plugin.photonstorm
 		public var onPreFireCallback:Function;
 		public var onFireCallback:Function;
 		public var onPostFireCallback:Function;
+		public var onPreBulletKill:Function;
 		
 		//	Sounds
 		public var onPreFireSound:FlxSound;

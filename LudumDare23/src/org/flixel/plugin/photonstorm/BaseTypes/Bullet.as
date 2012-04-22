@@ -218,6 +218,9 @@ package org.flixel.plugin.photonstorm.BaseTypes
 		{
 			if (lifespan > 0 && getTimer() > expiresTime)
 			{
+				if (weapon.onPreBulletKill is Function)
+					weapon.onPreBulletKill.apply();
+					
 				kill();
 			}
 			

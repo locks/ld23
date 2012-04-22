@@ -1,22 +1,24 @@
 package Enemies 
 {
-	import org.flixel.FlxSprite;
+	import org.flixel.*;
 	
 	/**
 	 * ...
 	 * @author Ricardo Mendes
 	 */
-	public class Swarm extends FlxSprite 
+	public class Swarm extends FlxEmitter
 	{
 		
 		
-		public function Swarm() 
+		public function Swarm(X:Number,Y:Number,Size:Number) 
 		{
-			
+			super();
 		}
 		
-		override public function create():void
+		override public function update():void
 		{
+			
+			super.update();
 			
 		}
 		

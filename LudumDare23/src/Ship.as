@@ -58,26 +58,30 @@ package
 			
 			if(FlxG.keys.A || FlxG.keys.LEFT)
 			{
-				if (this.x + 10 > 0) {
+				if (this.x + 10 > 0) 
+				{
 					acceleration.x = -maxVelocity.x * 4;
 				}
 			}
 			else if(FlxG.keys.D || FlxG.keys.RIGHT)
 			{
-				if (this.x + this.width - 10 < FlxG.width) {
+				if (this.x + this.width - 10 < FlxG.width) 
+				{
 					acceleration.x = maxVelocity.x * 4;
 				}
 			}
 			
 			if(FlxG.keys.W || FlxG.keys.UP)
 			{
-				if (this.y + 10 > 0) {
+				if (this.y + 10 > 0) 
+				{
 					acceleration.y = -maxVelocity.y * 4;
 				}
 			}
 			else if(FlxG.keys.S || FlxG.keys.DOWN)
 			{
-				if (this.y + this.height - 10 < FlxG.height) {
+				if (this.y + this.height - 10 < FlxG.height) 
+				{
 					acceleration.y = maxVelocity.y * 4;
 				}
 			}
