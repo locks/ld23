@@ -33,8 +33,8 @@ package
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			
 			_cannon = new FlxWeapon("cannon", _player, "x", "y");
-			_cannon.makePixelBullet(20, 4, 4, 0x123534);
-			_cannon.setBulletSpeed(1);
+			_cannon.makePixelBullet(20, 4, 4, 0xFF123456);
+			_cannon.setBulletSpeed(100);
 			_cannon.setFireRate(1000);
 			
 			add(_cannon.group);
