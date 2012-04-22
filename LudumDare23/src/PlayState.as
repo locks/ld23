@@ -13,14 +13,16 @@ package
 		protected var _bullets:FlxGroup;
 		protected var _gibs:FlxEmitter;
 		
-		private var _sf:StarField;
 		private var _hud:HUD;
+		
+		private var _curPlanet:Planet;
 		
 		override public function create():void
 		{
+			_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
+			add(_curPlanet);
 			
-			_sf = new StarField();
-			add(_sf);
+			shrinkPlanet();
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			add(_player);
@@ -34,8 +36,8 @@ package
 			
 			_hud = new HUD();
 			add(_hud)
-
-			Registry.Fuel = 14;
+			
+			
 		}
 		
 		override public function update():void
@@ -43,6 +45,12 @@ package
 			super.update();
 		}
 		
+		private function shrinkPlanet():void
+		{
+			_curPlanet.scale.x = _curPlanet.scale.y = .5;
+			_curPlanet.x -= 150;
+			_curPlanet.y -= 125;
+		}
 	}
 }
 
