@@ -51,9 +51,8 @@ package
 			add(_follow);
 			add(_bullets);
 			
-			
-			
 			_asplosions = new FlxGroup();
+			add(_asplosions);
 			
 			_hud = new HUD();
 			add(_hud);
@@ -81,14 +80,19 @@ package
 			_curPlanet.scale.x = _curPlanet.scale.y = .5;
 		}
 		
-		public function GrenadeBoom():void
+		public function GrenadeBoom(bullet:FlxObject):void
 		{
-			FlxG.log("yays");
-			//var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
-			var boom:Explosion = new Explosion;
-			FlxG.log(boom.x)
-			boom.x = (5);
-			boom.y = (5);
+			var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
+			boom.reset(bullet.x, bullet.y);
+			if (FlxU.floor(FlxG.random()*200) % 2 == 0)
+			{
+				boom.play("Dblue");
+			}
+			else
+			{
+				boom.play("Lblue");
+			}
+			
 		}
 	}
 }
