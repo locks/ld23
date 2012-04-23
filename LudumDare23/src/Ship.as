@@ -48,7 +48,6 @@ package
 			height = 41;
 			width = 40;
 			offset.y = 11;
-			
 		}
 		
 		override public function update():void

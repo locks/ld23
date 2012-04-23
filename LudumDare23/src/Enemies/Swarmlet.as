@@ -11,7 +11,6 @@ package Enemies
 	{
 		[Embed(source = '../data/swarm.png')] private var ImgSwarmlet:Class;
 
-
     //References to other game objects:
     protected var _player:Ship;		//The player object
 
@@ -34,6 +33,8 @@ package Enemies
     {
       super();
 	  loadGraphic(ImgSwarmlet);
+	  addAnimation("explodeYellow", [1, 2, 3, 4, 5, 6, 7, 8, 9], 40);
+	  addAnimation("explodeOrange", [1, 2, 3, 4, 5, 6, 7, 8, 9], 40);
 	  
       //These parameters help control the ship's
       //speed and direction during the update() loop.
@@ -110,10 +111,10 @@ package Enemies
     //the jets are turned off, bits are exploded, and points are rewarded.
     override public function kill():void
     {
-      if(!alive)
-        return;
+      if(!alive) return;
       //FlxG.play(SndExplode);
       super.kill();
+	  
       flicker(0);
       FlxG.score += 200;
     }

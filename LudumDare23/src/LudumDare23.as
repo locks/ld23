@@ -21,6 +21,8 @@ package
 			super(320, 240, MenuState, 2, 60, 60);
 			forceDebugger = true;
 			
+			FlxG.debug = true;
+			
 		}
 
 	}
