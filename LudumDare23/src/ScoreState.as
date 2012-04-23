@@ -17,6 +17,7 @@ package
 		
 		private var background:FlxGroup;
 		private var titleText:FlxText;
+		private var scoreText:FlxText;
 		
 		private var btnContinue:FlxButton;
 		
@@ -30,6 +31,13 @@ package
 			titleText.alignment = "center";
 			titleText.size = 20;
 			add(titleText);
+			
+			scoreText = new FlxText(0, FlxG.height / 2, FlxG.width, FlxG.score.toString());
+			scoreText.y -= scoreText.height + 5;
+			scoreText.color = 0xFF000000;
+			scoreText.size = 30;
+			scoreText.alignment = "center";
+			add(scoreText);
 			
 			btnContinue = new FlxButton(FlxG.width, FlxG.height , "Next Level", onPlay);
 			btnContinue.x -= btnContinue.width + 10;
