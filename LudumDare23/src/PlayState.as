@@ -86,14 +86,14 @@ package
 		
 		override public function update():void
 		{
-			if (FlxG.mouse.justPressed() && FlxG.keys.SPACE) 
+			if (FlxG.mouse.justPressed()) 
 			{
 				_cannon.setBulletAcceleration(100, 100, 200, 200);
 				_cannon.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
 				_cannon.fireAtMouse();
 			}
 			
-			if (FlxG.mouse.pressed() && !FlxG.keys.SPACE) 
+			if (FlxG.mouse.pressed() && FlxG.keys.SPACE) 
 			{
 				_laser.setBulletAcceleration(100, 100, 200, 200);
 				_laser.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
