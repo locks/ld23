@@ -1,12 +1,18 @@
 package
 {
-
+	import com.increpare.bfxr.Bfxr;
 	import org.flixel.*;
 
 	public class MenuState extends FlxState
 	{
 		[Embed(source = 'data///titleBackground.png')]private var ImgBackground:Class;
 		[Embed(source = "data/team.png")]private var ImgTeam:Class;
+		[Embed(source = 'data///titleBackground.png')] private var imgBackground:Class;
+		[Embed(source = 'data///shr1nkFinal.mp3')] private var sndTitle:Class;
+	
+		private const strClick:String = ",0.5,,0.1943,,0.1338,0.3,0.2706,,,,,,,,,,,,,0.1321,,,,,1,,,0.1,,,,masterVolume";
+		public  var sndClick:Bfxr = new Bfxr();
+		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
 		private var creditsButton:FlxButton;
@@ -23,6 +29,12 @@ package
 			Title = new FlxText(0, 0, FlxG.camera.width, "Shr1nk")
 			Title.setFormat(null, 16, 0xFFFFFF, "left", 0x333333);
 			add(Title);
+			
+			FlxG.play(sndTitle);
+			
+			sndClick = new Bfxr();
+			sndClick.Load(Registry.strClick);
+			sndClick.CacheMutations(0.05, 10);	//cache 5 mutations
 			
 			devButton = new FlxButton(FlxG.width / 2 - 40, FlxG.height / 3 + 60, "Insert Site", onSite);
 			devButton.x = FlxG.width - devButton.width - 10;
@@ -62,12 +74,14 @@ package
 		protected function onPlay():void
 		{
 			playButton.exists = false;
+			sndClick.Play(0.5);
 			FlxG.switchState(new GalaxyState());
 		}
 		
 		protected function onCredits():void
 		{
 			creditsButton.exists = false;
+			sndClick.Play(0.5);
 			FlxG.switchState(new CreditsState());
 		}
 		
