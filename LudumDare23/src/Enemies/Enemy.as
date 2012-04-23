@@ -43,6 +43,8 @@ package Enemies
     {
       super();
 	  
+	  health = 50;
+	  
       loadRotatedGraphic(ImgEnemy, 60, 0, false, true);
 	  //loadGraphic(ImgEnemy, true, false, 24, 24, false);
 	  this.flicker(0.5);
