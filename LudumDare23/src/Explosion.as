@@ -10,6 +10,7 @@ package
 	public class Explosion extends FlxSprite
 	{
 		[Embed(source = "data/explosionsmedium-blue.png")]private var ImgAsplode:Class;
+
 		private var lifespan:Number = 1/3;
 		private var origlifespan:Number = lifespan;
 		

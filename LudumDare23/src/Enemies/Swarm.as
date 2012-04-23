@@ -21,7 +21,7 @@ package Enemies
 			y = Y;
 			
 			var tmp:Swarmlet
-			for (var i:int; i < 50; i++)
+			for (var i:int; i < 100; i++)
 			{
 				tmp = new Swarmlet();
 				tmp.init(FlxU.floor(FlxG.random() * 20) + x, FlxU.floor(FlxG.random() * 20) + y, _player);

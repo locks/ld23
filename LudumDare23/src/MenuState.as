@@ -5,8 +5,8 @@ package
 
 	public class MenuState extends FlxState
 	{
-		[Embed(source = 'data///titleBackground.png')] private var imgBackground:Class;
-		
+		[Embed(source = 'data///titleBackground.png')]private var ImgBackground:Class;
+		[Embed(source = "data/team.png")]private var ImgTeam:Class;
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
 		private var creditsButton:FlxButton;
@@ -17,10 +17,11 @@ package
 		{
 			FlxG.bgColor = 0xff000000;
 			
-			add(new FlxSprite(0, 0, imgBackground));
+			add(new FlxSprite(0, 0, ImgBackground));
+			add(new FlxSprite(FlxG.width-140, 0, ImgTeam));
 			
 			Title = new FlxText(0, 0, FlxG.camera.width, "Shr1nk")
-			Title.setFormat(null, 16, 0xFFFFFF, "center", 0x333333);
+			Title.setFormat(null, 16, 0xFFFFFF, "left", 0x333333);
 			add(Title);
 			
 			devButton = new FlxButton(FlxG.width / 2 - 40, FlxG.height / 3 + 60, "Insert Site", onSite);
