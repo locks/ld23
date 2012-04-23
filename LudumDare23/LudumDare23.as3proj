@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\LudumDare23.swf" />
+    <movie path="G:\LD23\LudumDare23.swf" />
     <movie fps="60" />
     <movie width="640" />
     <movie height="480" />
