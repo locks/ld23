@@ -7,9 +7,13 @@ package
 	{
 		[Embed(source = 'data///titleBackground.png')]private var ImgBackground:Class;
 		[Embed(source = "data/team.png")]private var ImgTeam:Class;
+		[Embed(source = "data/logo.png")]private var ImgLogo:Class;
+		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
 		private var creditsButton:FlxButton;
+		
+		private var logoImage:FlxSprite;
 		
 		private var Title:FlxText;
 		
@@ -18,25 +22,26 @@ package
 			FlxG.bgColor = 0xff000000;
 			
 			add(new FlxSprite(0, 0, ImgBackground));
+			add(new FlxSprite(-20, -15, ImgLogo));
 			add(new FlxSprite(FlxG.width-140, 0, ImgTeam));
 			
-			Title = new FlxText(0, 0, FlxG.camera.width, "Shr1nk")
-			Title.setFormat(null, 16, 0xFFFFFF, "left", 0x333333);
-			add(Title);
+			//Title = new FlxText(0, 0, FlxG.camera.width, "Shr1nk")
+			//Title.setFormat(null, 16, 0xFFFFFF, "left", 0x333333);
+			//add(Title);
+			
 			
 			devButton = new FlxButton(FlxG.width / 2 - 40, FlxG.height / 3 + 60, "Insert Site", onSite);
 			devButton.x = FlxG.width - devButton.width - 10;
 			devButton.soundOver = null;  //replace with mouseOver sound
-			add(devButton);
+			//add(devButton);
 			
-			playButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 100, "Click To Play", onPlay);
-			playButton.x = FlxG.width - playButton.width - 10;
+			playButton = new FlxButton(FlxG.width - devButton.width - 10, FlxG.height - devButton.height * 2 - 20 , "Click To Play", onPlay);
 			playButton.soundOver = devButton.soundOver;
 			playButton.color = devButton.color;
 			playButton.label.color = devButton.label.color;
 			add(playButton);
 			
-			creditsButton = new FlxButton(FlxG.width/2 - 40,FlxG.height / 3 + 100 + playButton.height * 2, "Credits", onCredits);
+			creditsButton = new FlxButton(FlxG.width - playButton.width - 10, FlxG.height - playButton.height - 10, "Credits", onCredits);
 			creditsButton.x = FlxG.width - creditsButton.width - 10;
 			creditsButton.soundOver = devButton.soundOver;
 			creditsButton.color = devButton.color;
