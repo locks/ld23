@@ -15,6 +15,7 @@ package
 		[Embed(source = 'data///crosshair.png')] private var ImgCursor:Class;
 		[Embed(source = 'data///laserAnim.png')] private var ImgLaser:Class;
 		[Embed(source = 'data///grenade.png')] private var ImgGrenade:Class;
+		[Embed(source = 'data///gameplayTheme.mp3')] private var sndMusic:Class;
 
 		protected var _player:Ship;
 		protected var _swarm:Swarm;
@@ -43,6 +44,8 @@ package
 		
 		override public function create():void
 		{
+			FlxG.playMusic(sndMusic);
+			
 			_curPlanet = new Planet(FlxG.width - 250, FlxG.height - 250, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
 			_curPlanet.immovable = true;

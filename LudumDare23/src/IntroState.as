@@ -18,7 +18,7 @@ package
 		private var BG:FlxSprite;
 		private var Counter:int = 0;
 		
-		private var text:String = "Press enter";
+		private var text:FlxText;
 		
 		private var dialogue:FlxSound;
 		
@@ -30,7 +30,7 @@ package
 			background.add(BG);
 			add(background);
 			
-			var text:FlxText = new FlxText(0, 0, FlxG.width, "Press spacebar");
+			text = new FlxText(0, 0, FlxG.width, "Press spacebar");
 			text.alignment = "right";
 			add(text);
 			
@@ -58,6 +58,8 @@ package
 			if (Counter == 3)
 			{
 				dialogue.stop();
+				//text = new FlxText(0, 0, FlxG.width, "loading ...");
+				text.text = "loading ...";
 				FlxG.switchState(new PlayState());
 			}
 		}
