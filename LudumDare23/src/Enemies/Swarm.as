@@ -24,7 +24,7 @@ package Enemies
 			for (var i:int; i < 100; i++)
 			{
 				tmp = new Swarmlet();
-				tmp.init(FlxU.floor(FlxG.random() * 20) + x, FlxU.floor(FlxG.random() * 20) + y, _player);
+				tmp.init(FlxU.floor(FlxG.random() * 50) + x, FlxU.floor(FlxG.random() * 50) + y, _player);
 				FlxG.log(tmp.x);
 				add(tmp);
 			}
@@ -33,11 +33,6 @@ package Enemies
 		override public function update():void
 		{
 			super.update();
-			if (countLiving() == 0)
-			{
-				kill();
-				destroy();
-			}
 		}
 	}
 

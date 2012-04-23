@@ -29,12 +29,6 @@ package
 			scale.x -= factor;
 			scale.y -= factor;
 			
-			width   = width * factor;
-			height = height * factor;
-			
-			this.x = _point.x;
-			this.y = _point.y;
-			
 			centerOffsets();
 		}
 		

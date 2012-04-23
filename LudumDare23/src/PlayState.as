@@ -6,6 +6,7 @@ package
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.BaseTypes.Bullet;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
+	import org.flixel.plugin.photonstorm.FlxMath;
 	
 	import com.increpare.bfxr.Bfxr;
 
@@ -35,18 +36,18 @@ package
 		protected var sndGrenade:Bfxr;
 		protected var sndExplosion:Bfxr;
 		protected var sndLaser:Bfxr;
+
+		private var dx:int;
+		private var dy:int;
+		private var radius:int;
 		
 		override public function create():void
 		{
-			_curPlanet = new Planet(FlxG.width - 200, FlxG.height - 200, Registry.ImgPlanet1);
+			_curPlanet = new Planet(FlxG.width - 250, FlxG.height - 250, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
 			_curPlanet.immovable = true;
-			_curPlanet.height = 80;
-			_curPlanet.width   = 80;
 			_curPlanet.centerOffsets();
 			add(_curPlanet);
-			
-			shrinkPlanet();
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			_player.allowCollisions = 0;
@@ -144,11 +145,8 @@ package
 			//FlxG.collide(_asplosions, _enemies, CannonEnemyCollide);
 			FlxG.collide(_laser.group, _swarm, LaserSwarmCollide);
 			FlxG.overlap(_laser.group, _curPlanet, LaserPlanetCollide);
-		}
-		
-		private function shrinkPlanet():void
-		{
-			_curPlanet.scale.x = _curPlanet.scale.y = .5;
+			
+			
 		}
 		
 		public function GrenadeBoom(bullet:FlxObject):void
@@ -206,13 +204,15 @@ package
 		
 		private function LaserPlanetCollide(laser:FlxObject, planet:Planet):void
 		{
-			//laser.kill();
+			dx = laser.x - planet.getMidpoint().x;
+			dy = laser.y - planet.getMidpoint().y;
+			radius = 100 * planet.scale.x;
 			
-			planet.shrink();
-			
-			//planet.scale.x = 0.01 + 0.01 * planet.health ;
-			//planet.scale.y = 0.01 + 0.01 * planet.health ;
-			//shrinkPlanet(0.9);
+			//collision check for laser and planet
+			if (dx*dx+dy*dy < radius*radius) 
+			{
+				planet.shrink();
+			}
 		}
 	}
 }
