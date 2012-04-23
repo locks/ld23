@@ -104,7 +104,8 @@ package
 			if (FlxG.keys.SPACE) 
 			{
 				_cannon.setBulletAcceleration(200, 200, 300, 300);
-				_cannon.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
+				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
+				_cannon.fireAtMouse();
 			}
 			
 			if (FlxG.mouse.pressed()) 
