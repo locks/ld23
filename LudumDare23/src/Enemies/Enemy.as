@@ -44,7 +44,7 @@ package Enemies
       super();
 	  
       loadRotatedGraphic(ImgEnemy, 60, 0, false, true);
-	  loadGraphic(ImgEnemy, true, false, 24, 24, false);
+	  //loadGraphic(ImgEnemy, true, false, 24, 24, false);
 	  this.flicker(0.5);
 
       //We want the enemy's "hit box" or actual size to be
