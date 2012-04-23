@@ -122,15 +122,15 @@ package
 			
 			sndGrenade = new Bfxr();
 			sndGrenade.Load(Registry.strGrenadeExplosion);
-			sndGrenade.CacheMutations(0.05, 5);
+			sndGrenade.CacheMutations(0.05, 2);
 			
 			sndExplosion = new Bfxr();
 			sndExplosion.Load(Registry.strExplosion);
-			sndExplosion.CacheMutations(0.05, 10);
+			sndExplosion.CacheMutations(0.05, 5);
 			
 			sndLaser = new Bfxr();
 			sndLaser.Load(Registry.strLaser);
-			sndLaser.CacheMutations(0.05, 20);
+			sndLaser.CacheMutations(0.05, 5);
 			
 			FlxG.mouse.load(ImgCursor, 3);
 			FlxG.mouse.show();
