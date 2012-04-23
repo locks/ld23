@@ -101,17 +101,10 @@ package
 		
 		override public function update():void
 		{
-<<<<<<< HEAD
 			if (FlxG.keys.SPACE) 
 			{
 				_cannon.setBulletAcceleration(200, 200, 300, 300);
 				_cannon.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
-=======
-			if (FlxG.mouse.pressed()) {
-				_cannon.setBulletAcceleration(100, 100, 200, 200);
-				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
->>>>>>> levelselect
-				_cannon.fireAtMouse();
 			}
 			
 			if (FlxG.mouse.pressed()) 
