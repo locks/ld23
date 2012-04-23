@@ -62,7 +62,7 @@ package
 		protected function onPlay():void
 		{
 			playButton.exists = false;
-			FlxG.switchState(new GalaxyState());
+			FlxG.switchState(new IntroState());
 		}
 		
 		protected function onCredits():void

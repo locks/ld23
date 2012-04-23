@@ -24,9 +24,7 @@ package
 		private var _cannon:FlxWeapon;
 		private var _laser:FlxWeapon;
 		
-		
 		override public function create():void
-		
 		{
 			_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
@@ -86,19 +84,20 @@ package
 		
 		override public function update():void
 		{
-			if (FlxG.mouse.justPressed()) 
+			if (FlxG.mouse.pressed() && _cannon.currentBullet == null) 
+			{
+				_cannon.group.callAll("kill");
+				_laser.setBulletAcceleration(100, 100, 200, 200);
+				_laser.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
+				_laser.fireAtMouse();
+			}
+			else if (FlxG.mouse.justPressed()) 
 			{
 				_cannon.setBulletAcceleration(100, 100, 200, 200);
 				_cannon.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
 				_cannon.fireAtMouse();
 			}
 			
-			if (FlxG.mouse.pressed() && FlxG.keys.SPACE) 
-			{
-				_laser.setBulletAcceleration(100, 100, 200, 200);
-				_laser.setBulletSpeed( 100+FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
-				_laser.fireAtMouse();
-			}
 			else
 			{
 				_laser.group.callAll("kill");
@@ -106,8 +105,6 @@ package
 			
 			super.update();
 			
-			
-			FlxG.collide(_cannon.group, _enemies, CannonEnemyCollide)
 		}
 		
 		private function shrinkPlanet():void
@@ -134,7 +131,6 @@ package
 		private function CannonEnemyCollide(haha:FlxObject, lol:FlxObject):void
 		{
 			haha.kill();
-			lol.kill();
 		}
 	}
 }
