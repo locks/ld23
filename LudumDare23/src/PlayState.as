@@ -30,20 +30,12 @@ package
 		
 		override public function create():void
 		{
-<<<<<<< HEAD
 			_curPlanet = new Planet(FlxG.width - 200, FlxG.height - 200, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
 			_curPlanet.immovable = true;
 			_curPlanet.height = 80;
 			_curPlanet.width   = 80;
 			_curPlanet.centerOffsets();
-=======
-			//_curPlanet = new Planet(FlxG.width - 100, FlxG.height - 100, Registry.ImgPlanet1);
-			_curPlanet = Registry.CurrentPlanet;
-			_curPlanet.x = FlxG.width - 100;
-			_curPlanet.y = FlxG.height - 100;
-			//_curPlanet.antialiasing = true;
->>>>>>> levelselect
 			add(_curPlanet);
 			
 			shrinkPlanet();
