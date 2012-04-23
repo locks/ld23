@@ -2,6 +2,8 @@ package
 {
 	
 	import Enemies.*;
+	import org.flixel.plugin.photonstorm.FX.*;
+	import org.flixel.plugin.photonstorm.FlxSpecialFX;
 	
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.BaseTypes.Bullet;
@@ -40,9 +42,23 @@ package
 		private var dx:int;
 		private var dy:int;
 		private var radius:int;
+
+		private var stars:FlxSprite;
+		private var starfield:StarfieldFX;
 		
 		override public function create():void
 		{
+			if (FlxG.getPlugin(FlxSpecialFX) == null)
+			{
+				FlxG.addPlugin(new FlxSpecialFX);
+			}
+			
+			// Creates a 2D scrolling starfield with 200 stars in it, the full screen size
+			starfield = FlxSpecialFX.starfield();
+			stars = starfield.create(0, 0, FlxG.width, FlxG.height, 200, StarfieldFX.STARFIELD_TYPE_2D);
+			add(stars);
+			add(starfield.sprite);
+			
 			_curPlanet = new Planet(FlxG.width - 250, FlxG.height - 250, Registry.ImgPlanet1);
 			_curPlanet.antialiasing = true;
 			_curPlanet.immovable = true;
@@ -213,6 +229,14 @@ package
 			{
 				planet.shrink();
 			}
+		}
+		
+		override public function destroy():void
+		{
+			//	Important! Clear out the plugin, otherwise resources will get messed right up after a while
+			FlxSpecialFX.clear();
+
+			super.destroy();
 		}
 	}
 }
