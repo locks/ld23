@@ -31,7 +31,7 @@ package
 		private var _hud:HUD;
 		
 		private var _curPlanet:Planet;
-		private var _cannon:FlxWeapon;
+		private var _grenadeLauncher:FlxWeapon;
 		private var _laser:FlxWeapon;
 		
 		protected var sndGrenade:Bfxr;
@@ -55,14 +55,14 @@ package
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
 			_player.allowCollisions = 0;
 			
-			_cannon = new FlxWeapon("cannon", _player);
+			_grenadeLauncher = new FlxWeapon("cannon", _player);
 			//_cannon.makePixelBullet(200, 8, 8, 0xFF123456);
-			_cannon.makeAnimatedBullet(2, ImgGrenade, 8, 8, [0,1], 10, true, 20, 20);
+			_grenadeLauncher.makeAnimatedBullet(2, ImgGrenade, 8, 8, [0,1], 10, true, 20, 20);
 			//_cannon.group.setAll("antialiasing", true);
 			//_cannon.setBulletOffset(20, 20);
-			_cannon.setBulletLifeSpan(1000);
-			_cannon.onPreBulletKill = GrenadeBoom;
-			_cannon.setFireRate(1000);
+			_grenadeLauncher.setBulletLifeSpan(1000);
+			_grenadeLauncher.onPreBulletKill = GrenadeBoom;
+			_grenadeLauncher.setFireRate(1000);
 			
 			//var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
 			//boom.reset(bullet.x - 2, bullet.y - 2);
@@ -79,7 +79,7 @@ package
 			_laser.setBulletSpeed(200);
 			_laser.setBulletLifeSpan(1000);
 			
-			add(_cannon.group);
+			add(_grenadeLauncher.group);
 			add(_laser.group);
 			add(_player);
 			
@@ -127,9 +127,9 @@ package
 		{
 			if (FlxG.keys.SPACE) 
 			{
-				_cannon.setBulletAcceleration(200, 200, 300, 300);
-				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
-				_cannon.fireAtMouse();
+				_grenadeLauncher.setBulletAcceleration(200, 200, 300, 300);
+				_grenadeLauncher.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
+				_grenadeLauncher.fireAtMouse();
 			}
 			
 			if (FlxG.mouse.pressed()) 
@@ -147,6 +147,7 @@ package
 			//FlxG.collide(_cannon.group, _enemies, CannonEnemyCollide);
 			//FlxG.collide(_asplosions, _enemies, CannonEnemyCollide);
 			FlxG.collide(_laser.group, _swarm, LaserSwarmCollide);
+			FlxG.collide(_laser.group, _enemies, LaserEnemyCollide);
 			FlxG.overlap(_laser.group, _curPlanet, LaserPlanetCollide);
 			
 			
@@ -164,13 +165,7 @@ package
 			FlxG.overlap(boom, _swarm, GrenadeSwarmCollide);
 			//FlxG.collide(boom, _swarm, LaserSwarmCollide);
 		}
-		
-		private function CannonEnemyCollide(haha:FlxObject, lol:FlxObject):void
-		{
-			haha.kill();
-			lol.kill();
-		}
-		
+			
 		private function GrenadeSwarmCollide(grenade:Grenade, swarmlet:Swarmlet):void
 		{
 			var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
@@ -179,7 +174,19 @@ package
 			boom.explode("small");
 
 			sndExplosion.Play(0.5);
-			swarmlet.kill();
+			swarmlet.hurt(1);
+		}
+		
+		private function LaserEnemyCollide(laser:FlxObject, enemy:Enemy):void
+		{
+			var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
+			boom.reset(enemy.x - boom.width / 2, enemy.y -  boom.height / 2);
+			
+			boom.explode("large");
+			
+			sndExplosion.Play(0.8);
+			enemy.hurt(1);
+			laser.kill();
 		}
 		
 		private function GrenadeObjectCollide(grenade:Grenade, enemy:FlxObject):void
@@ -190,7 +197,7 @@ package
 			boom.explode("large");
 			
 			sndExplosion.Play(0.8);
-			enemy.kill();
+			enemy.hurt(5);
 		}
 		
 		private function LaserSwarmCollide(laser:FlxObject, swarmlet:Swarmlet):void
