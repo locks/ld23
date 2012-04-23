@@ -1,9 +1,13 @@
 package
 {
+	
 	import Enemies.*;
+	
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.BaseTypes.Bullet;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
+	
+	import com.increpare.bfxr.Bfxr;
 
 	public class PlayState extends FlxState
 	{
@@ -27,6 +31,10 @@ package
 		private var _curPlanet:Planet;
 		private var _cannon:FlxWeapon;
 		private var _laser:FlxWeapon;
+		
+		protected var sndGrenade:Bfxr;
+		protected var sndExplosion:Bfxr;
+		protected var sndLaser:Bfxr;
 		
 		override public function create():void
 		{
@@ -95,6 +103,18 @@ package
 			_hud = new HUD();
 			add(_hud);
 			
+			sndGrenade = new Bfxr();
+			sndGrenade.Load(Registry.strGrenadeExplosion);
+			sndGrenade.CacheMutations(0.05, 5);
+			
+			sndExplosion = new Bfxr();
+			sndExplosion.Load(Registry.strExplosion);
+			sndExplosion.CacheMutations(0.05, 10);
+			
+			sndLaser = new Bfxr();
+			sndLaser.Load(Registry.strLaser);
+			sndLaser.CacheMutations(0.05, 20);
+			
 			FlxG.mouse.load(ImgCursor, 3);
 			FlxG.mouse.show();
 		}
@@ -110,6 +130,7 @@ package
 			
 			if (FlxG.mouse.pressed()) 
 			{
+				sndLaser.Play(0.3);
 				_laser.fireAtMouse();
 			}
 			else
@@ -135,6 +156,7 @@ package
 			var boom:Grenade = _asplosions.recycle(Grenade) as Grenade;
 			boom.reset(bullet.x - boom.width / 2, bullet.y -  boom.height / 2);
 				
+			sndGrenade.Play();
 			boom.detonate();
 			
 			FlxG.overlap(boom, _enemies, GrenadeObjectCollide);
@@ -155,6 +177,7 @@ package
 			
 			boom.explode("small");
 
+			sndExplosion.Play(0.5);
 			swarmlet.kill();
 		}
 		
@@ -165,6 +188,7 @@ package
 			
 			boom.explode("large");
 			
+			sndExplosion.Play(0.8);
 			enemy.kill();
 		}
 		

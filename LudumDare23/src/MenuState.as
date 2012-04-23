@@ -8,6 +8,8 @@ package
 		[Embed(source = 'data///titleBackground.png')]private var ImgBackground:Class;
 		[Embed(source = "data/team.png")]private var ImgTeam:Class;
 		[Embed(source = "data/logo.png")]private var ImgLogo:Class;
+
+		[Embed(source = "data/shr1nkFinal.mp3")]private var sndTitle:Class;
 		
 		private var playButton:FlxButton;
 		private var devButton:FlxButton;
@@ -29,6 +31,7 @@ package
 			//Title.setFormat(null, 16, 0xFFFFFF, "left", 0x333333);
 			//add(Title);
 			
+			FlxG.play(sndTitle);
 			
 			devButton = new FlxButton(FlxG.width / 2 - 40, FlxG.height / 3 + 60, "Insert Site", onSite);
 			devButton.x = FlxG.width - devButton.width - 10;
