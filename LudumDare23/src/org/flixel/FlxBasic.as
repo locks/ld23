@@ -29,6 +29,7 @@ package org.flixel
 		 * Controls whether <code>draw()</code> is automatically called by FlxState/FlxGroup.
 		 */
 		public var visible:Boolean;
+		/*
 		/**
 		 * Useful state for many game objects - "dead" (!alive) vs alive.
 		 * <code>kill()</code> and <code>revive()</code> both flip this switch (along with exists, but you can override that).

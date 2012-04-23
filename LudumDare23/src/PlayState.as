@@ -1,7 +1,7 @@
 package
 {
+	import Enemies.*;
 	import org.flixel.*;
-	import Enemies.Enemy;
 	import org.flixel.plugin.photonstorm.BaseTypes.Bullet;
 	import org.flixel.plugin.photonstorm.FlxWeapon;
 
@@ -10,7 +10,7 @@ package
 		[Embed(source = 'data///crosshair.png')] private var ImgCursor:Class;
 
 		protected var _player:Ship;
-		protected var _swarms:FlxGroup;
+		protected var _swarm:Swarm;
 		
 		protected var _follow:Enemy;
 		
@@ -49,6 +49,11 @@ package
 			_follow = new Enemy();
 			_follow.init(20, 20, _bullets, _gibs, _player);
 			add(_follow);
+			
+			_swarm = new Swarm(40, 40, 50,_player);
+			add(_swarm);
+			
+			
 			add(_bullets);
 			
 			_asplosions = new FlxGroup();
