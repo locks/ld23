@@ -54,7 +54,7 @@ package Enemies
 
       reset(xPos - width/2,yPos - height/2);
       angle = angleTowardPlayer();
-      health = 2;	//Enemies take 2 shots to kill
+      health = 30;	//Enemies take 60 shots to kill
       _timer = 0;
     }
 

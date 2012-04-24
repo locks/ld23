@@ -14,6 +14,8 @@ package
 		
 		private var _weapon:FlxWeapon;
 		
+		public var unScrewed:Boolean;
+		
 		public function Ship(X:int, Y:int, Bullets:FlxGroup, Weapon:FlxWeapon = null)
 		{
 			super(X, Y);
@@ -84,7 +86,6 @@ package
 					acceleration.y = maxVelocity.y * 4;
 				}
 			}
-			
 			super.update();
 		}
 			

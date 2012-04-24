@@ -16,7 +16,7 @@ package
 			this.health = 100;
 		}
 		
-		public function shrink(factor:Number = 0.001):void
+		public function shrink(factor:Number = 0.0015):void
 		{
 			if (isShrunk()) return;
 			

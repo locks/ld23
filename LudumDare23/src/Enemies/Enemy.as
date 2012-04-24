@@ -43,8 +43,6 @@ package Enemies
     {
       super();
 	  
-	  health = 50;
-	  
       loadRotatedGraphic(ImgEnemy, 60, 0, false, true);
 	  //loadGraphic(ImgEnemy, true, false, 24, 24, false);
 	  this.flicker(0.5);
@@ -81,7 +79,7 @@ package Enemies
 
       reset(xPos - width/2,yPos - height/2);
       angle = angleTowardPlayer();
-      health = 2;	//Enemies take 2 shots to kill
+      health = 30;	//Enemies take 60 shots to kill
       _timer = 0;
       _shotClock = 0;
     }
