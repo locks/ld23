@@ -6,20 +6,19 @@ package
 	
 	public class CreditsState extends FlxState 
 	{
+		[Embed(source = 'data///credits.png')] private var ImgCredits:Class;
+		
 		private var exitButton:FlxButton;
 		
 		private var Title:FlxText;
 		
 		public function CreditsState() 
 		{
-			Title = new FlxText(0, FlxG.camera.height / 3, FlxG.camera.width, "Credits")
-			Title.setFormat(null, 16, 0xFFFFFF, "center");
-			add(Title);			
+			add(new FlxSprite(0, 0, ImgCredits));
 			
-			exitButton = new FlxButton(FlxG.width/2-40,FlxG.height / 3 + 60, "Main Menu", onExit);
-			exitButton.soundOver = null;  //replace with mouseOver sound
-			exitButton.color = 0xffD4D943;
-			exitButton.label.color = 0xffD8EBA2;
+			exitButton = new FlxButton(0, 0, "Main Menu", onExit);
+			exitButton.x = FlxG.width - exitButton.width - 10;
+			exitButton.y = FlxG.height - exitButton.height - 10;
 			add(exitButton);
 			
 			FlxG.mouse.show();
