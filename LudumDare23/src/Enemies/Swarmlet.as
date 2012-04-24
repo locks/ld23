@@ -50,11 +50,12 @@ package Enemies
     //like references to the player object and the ship's new position.
     public function init(xPos:int,yPos:int,ThePlayer:Ship):void
     {
+		
       _player = ThePlayer;
 
       reset(xPos - width/2,yPos - height/2);
       angle = angleTowardPlayer();
-      health = 30;	//Enemies take 60 shots to kill
+      health = 60;	//Enemies take 60 shots to kill
       _timer = 0;
     }
 
@@ -112,11 +113,9 @@ package Enemies
     override public function kill():void
     {
       if(!alive) return;
-      //FlxG.play(SndExplode);
       super.kill();
-	  
       flicker(0);
-      FlxG.score += 200;
+      FlxG.score += 10;
     }
 
     //A helper function that returns the angle between

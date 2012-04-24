@@ -47,6 +47,7 @@ package
 		
 		protected function onPlay():void
 		{
+			Registry.Energy = 1500;
 			btnContinue.exists = false;
 			FlxG.switchState(new PlayState());
 		}

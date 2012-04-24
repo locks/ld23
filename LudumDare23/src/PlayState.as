@@ -4,6 +4,7 @@ package
 	import Enemies.*;
 	import org.flixel.plugin.photonstorm.FX.*;
 	import org.flixel.plugin.photonstorm.FlxSpecialFX;
+	import org.flixel.plugin.photonstorm.PNGEncoder;
 	
 	import org.flixel.*;
 	import org.flixel.plugin.photonstorm.BaseTypes.Bullet;
@@ -47,7 +48,9 @@ package
 		private var starfield:StarfieldFX;
 		
 		private var levelOver:Boolean;
-		private var levelOverTimer:Number = 15;
+		private var levelOverTimer:Number = 1;
+		
+		private var isFiring:Boolean = false;
 		
 		override public function create():void
 		{
@@ -71,7 +74,6 @@ package
 			add(_curPlanet);
 			
 			_player = new Ship(FlxG.width / 2 - 40, FlxG.height / 2 - 55, _bullets);
-			_player.allowCollisions = 0;
 			
 			_cannon = new FlxWeapon("cannon", _player);
 			//_cannon.makePixelBullet(200, 8, 8, 0xFF123456);
@@ -80,6 +82,7 @@ package
 			//_cannon.setBulletOffset(20, 20);
 			_cannon.setBulletLifeSpan(1000);
 			_cannon.onPreBulletKill = GrenadeBoom;
+			_cannon.onFireCallback = lol;
 			_cannon.setFireRate(1000);
 			
 			//var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
@@ -143,56 +146,65 @@ package
 		
 		override public function update():void
 		{
+			
 			if (FlxG.keys.SPACE) 
 			{
 				_cannon.setBulletAcceleration(200, 200, 300, 300);
 				_cannon.setBulletSpeed( 100 + FlxU.getDistance(_player.getMidpoint(), new FlxPoint(FlxG.mouse.x, FlxG.mouse.y)) );
 				_cannon.fireAtMouse();
+				isFiring = true;
+			}
+			else 
+			{
+				isFiring = false;
 			}
 			
 			if (FlxG.mouse.pressed()) 
 			{
+				Registry.Energy -= 1;
 				sndLaser.Play(0.3);
 				_laser.fireAtMouse();
+				isFiring = true;
 			}
 			else
 			{
+				isFiring = false;
 				_laser.group.callAll("kill");
 			}
 			
 			if (levelOver)
 			{
+				Registry.Energy = 1500;
 				levelOverTimer -= FlxG.elapsed;
-				if (levelOverTimer == 0)
+				if (levelOverTimer <= 0)
 					FlxG.switchState(new ScoreState());
+			}
+			
+			if (Registry.Energy <= 0)
+			{
+				FlxG.switchState(new GameOverState());
+			}
+			
+			if (isFiring == false && Registry.Energy < 1500)
+			{
+				Registry.Energy += 1.5;
 			}
 			
 			super.update();
 			
 			//FlxG.collide(_cannon.group, _enemies, CannonEnemyCollide);
 			//FlxG.collide(_asplosions, _enemies, CannonEnemyCollide);
-			FlxG.overlap(_laser.group, _swarm, LaserSwarmCollide);
-			FlxG.overlap(_laser.group, _enemies, LaserObjectCollide);
-			if (_curPlanet.isShrunk())
+			if (_curPlanet.isShrunk() == true)
 			{
-				dx = _player.x - _curPlanet.getMidpoint().x;
-				dy = _player.y - _curPlanet.getMidpoint().y;
-				radius = 100 * _curPlanet.scale.x;
-				
-				FlxG.log("lol");
-				
-				//collision check for laser and planet
-				if (dx*dx+dy*dy < radius*radius && FlxG.keys.justPressed("X")) 
-				{
-					_player.play("charge")
-					_curPlanet.kill();
-					levelOver = true;
-					FlxG.log("lol");
-				}
+				FlxG.overlap(_player, _curPlanet, collectPlanet);
 			}
 			else
 			{
+				FlxG.overlap(_laser.group, _swarm, LaserSwarmCollide);
+				FlxG.overlap(_laser.group, _enemies, LaserObjectCollide);
 				FlxG.overlap(_laser.group, _curPlanet, LaserPlanetCollide);
+				FlxG.overlap(_bullets, _player, playerHit);
+				FlxG.overlap(_swarm, _player, playerHit);
 			}
 			
 			
@@ -219,60 +231,62 @@ package
 		
 		private function GrenadeSwarmCollide(grenade:Grenade, swarmlet:Swarmlet):void
 		{
-			if (swarmlet.health <= 15)
+			if (swarmlet.health <= 25)
 			{
 				var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
 				boom.reset(swarmlet.x - boom.width / 2, swarmlet.y -  boom.height / 2);
 				boom.explode("small");
 				sndExplosion.Play(0.5);
-				swarmlet.kill();
+				swarmlet.hurt(25);
 			}
 			else
 			{
-				swarmlet.health -= 15;
+				swarmlet.hurt(25);
 				sndExplosion.Play(0.3);
 			}
 		}
 		
 		private function GrenadeObjectCollide(grenade:Grenade, enemy:FlxObject):void
 		{
-			if (enemy.health <= 15)
+			if (enemy.health <= 30)
 			{
 				var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
 				boom.reset(enemy.x - boom.width / 2, enemy.y -  boom.height / 2);
 				boom.explode("large");
 				sndExplosion.Play(0.8);
+				enemy.hurt(30);
 			}
 			else 
 			{
 				sndExplosion.Play(0.3);
-				enemy.health -= 15;
-				FlxG.log(enemy.health);
+				enemy.hurt(20);
 			}
 		}
 		
 		private function LaserSwarmCollide(laser:FlxObject, swarmlet:Swarmlet):void
 		{
-			if (swarmlet.health == 1)
+			if (swarmlet.health <= 1)
 			{
 				var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
 				boom.reset(swarmlet.x - boom.width / 2, swarmlet.y -  boom.height / 2);
 				boom.explode("small");
 				sndExplosion.Play(0.2);
+				swarmlet.kill();
 			}
-			swarmlet.health -= 1;
+			swarmlet.hurt(1);
 		}
 		
 		private function LaserObjectCollide(laser:FlxObject, enemy:FlxObject):void
 		{
-			if (enemy.health == 1)
+			if (enemy.health <= 1)
 			{
 				var boom:Explosion = _asplosions.recycle(Explosion) as Explosion;
 				boom.reset(enemy.x - boom.width / 2, enemy.y -  boom.height / 2);
 				boom.explode("large");
 				sndExplosion.Play(0.5);
+				enemy.kill();
 			}
-			enemy.health -= 1;
+			enemy.hurt(1);
 		}
 		
 		private function LaserPlanetCollide(laser:FlxObject, planet:Planet):void
@@ -289,12 +303,39 @@ package
 			}
 		}
 		
+		private function collectPlanet(ship:Ship, planet:Planet):void
+		{
+			planet.kill();
+			ship.play("charge");
+			levelOver = true;
+			FlxG.score += 5000;
+		}
+		
 		override public function destroy():void
 		{
 			//	Important! Clear out the plugin, otherwise resources will get messed right up after a while
 			FlxSpecialFX.clear();
 
 			super.destroy();
+		}
+		
+		private function playerHit(object1:FlxObject, Object2:FlxObject):void
+		{
+			if (object1.ID = 1)
+			{
+				Registry.Energy -=50;
+				object1.kill();
+			}
+			else
+			{
+				Registry.Energy -= 0.000000001;
+				object1.kill();
+			}
+		}
+		
+		private function lol():void
+		{
+			Registry.Energy -= 100;
 		}
 	}
 }

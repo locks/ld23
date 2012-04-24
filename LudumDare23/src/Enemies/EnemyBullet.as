@@ -19,10 +19,14 @@ package Enemies
 
 			//addAnimation("poof",[2, 3, 4], 50, false);
 			speed = 120;
+			
+			ID = 1;
 		}
 		
 		override public function update():void
 		{
+			
+			
 			if(!alive)
 			{
 				if(finished)

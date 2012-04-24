@@ -22,7 +22,7 @@ package
 		[Embed(source = "data/planets/planet10.gif")] public static var ImgPlanet10:Class;
 		[Embed(source = "data/planets/planet11.gif")] public static var ImgPlanet11:Class;
 		
-		public static var Energy:int = 1020;
+		public static var Energy:Number = 1500;
 		public static var Planets:Array = new Array( new Planet(0, 0, ImgPlanet1), new Planet(0, 0, ImgPlanet2), new Planet(0, 0, ImgPlanet3), new Planet(0, 0, ImgPlanet4), new Planet(0, 0, ImgPlanet5), new Planet(0, 0, ImgPlanet6), new Planet(0, 0, ImgPlanet7), new Planet(0, 0, ImgPlanet8), new Planet(0, 0, ImgPlanet9), new Planet(0, 0, ImgPlanet10), new Planet(0, 0, ImgPlanet11) );
 
 		//public static var CurrentPlanet:Planet = new Planet(0, 0, ImgPlanet1);

@@ -14,7 +14,6 @@ package
 	public class GameOverState extends FlxState 
 	{
 		[Embed(source = 'data///gameOver.png')] private var ImgGameOver:Class;
-		[Embed(source = 'data///gameOverYeah.mp3')] private var sndGameOver:Class;
 		
 		private var background:FlxGroup;
 		private var titleText:FlxText;
@@ -39,8 +38,6 @@ package
 			btnContinue.x -= btnContinue.width + 10;
 			btnContinue.y -= btnContinue.height + 10;
 			add(btnContinue);
-			
-			FlxG.play(sndGameOver);
 		}
 		
 		protected function onPlay():void

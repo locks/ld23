@@ -41,6 +41,7 @@ package Enemies
     //required parameters.
     public function Enemy()
     {
+		
       super();
 	  
       loadRotatedGraphic(ImgEnemy, 60, 0, false, true);
@@ -79,7 +80,7 @@ package Enemies
 
       reset(xPos - width/2,yPos - height/2);
       angle = angleTowardPlayer();
-      health = 30;	//Enemies take 60 shots to kill
+      health = 60;	//Enemies take 60 shots to kill
       _timer = 0;
       _shotClock = 0;
     }
@@ -210,8 +211,6 @@ package Enemies
       super.kill();
       flicker(0);
       _jets.kill();
-      _gibs.at(this);
-      _gibs.start(true,3,0,20);
       FlxG.score += 200;
     }
 
