@@ -28,22 +28,63 @@ package
 				tmp.addAnimation("empty", [2]);
 				tmp.moves = false;
 				tmp.solid = false;
-				tmp.play("full")
-				_FuelGroup.add(tmp)
+				tmp.play("full");
+				_FuelGroup.add(tmp);
 			}
-			add(_FuelGroup)
+			add(_FuelGroup);
 		}
 		
 		override public function update():void
 		{
+			var index:int = 0;
+			
+			var filled:int = Registry.Energy / 100;
+			var half:int = Registry.Energy % 100;
+			
+			//FlxG.log(filled);
+			
+			for each (var tank:FlxSprite in _FuelGroup.members)
+			{
+				if (filled > 0) {
+					tank.play("full");
+					filled--;
+					//FlxG.log('filled');
+				} else {
+					if (half > 0) {
+						//FlxG.log("half");
+						tank.play("half");
+						half = 0;
+					} else {
+						//FlxG.log("empty");
+						tank.play("empty");
+					}
+				}
+			}
+			
+			//for (var i:uint = 0; i < filled; ++i)
+			//{
+				//_FuelGroup.members[i].play("full");
+				//index++;
+			//}
+			//
+			//if (i > 0 && i < 50) {
+				//_FuelGroup.members[index].play("half");
+				//index++;
+			//}
+			//
+			//for (var j:uint = index; j < _FuelGroup.members.length; ++j) _FuelGroup.members[j].play("empty");
+			
+			/*
 			var l:uint = _FuelGroup.length;
 			for(var i:uint = 0; i < l; i++)
 			{
-				if(i < Registry.Energy)
-					_FuelGroup.members[i].play("full");
+				if(i-1 < Registry.Fuel)
+					_FuelGroup[i].play("full");
 				else
-					_FuelGroup.members[i].play("empty");
+					_FuelGroup[i].play("empty");
 			}
+			super.update();
+			*/
 			super.update();
 			
 		}
