@@ -25,7 +25,7 @@ package Enemies
 			{
 				tmp = new Swarmlet();
 				tmp.init(FlxU.floor(FlxG.random() * 50) + x, FlxU.floor(FlxG.random() * 50) + y, _player);
-				FlxG.log(tmp.x);
+				//FlxG.log(tmp.x);
 				add(tmp);
 			}
 		}
